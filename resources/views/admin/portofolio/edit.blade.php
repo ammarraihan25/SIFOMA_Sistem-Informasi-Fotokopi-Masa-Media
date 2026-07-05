@@ -51,6 +51,14 @@
                     <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3">{{ old('deskripsi', $portofolio->deskripsi) }}</textarea>
                 </div>
 
+                <div class="form-group mt-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" name="is_active" id="is_active" class="form-checkbox text-primary rounded focus:ring-primary h-5 w-5" {{ old('is_active', $portofolio->is_active) ? 'checked' : '' }}>
+                        <span class="font-medium">Tampilkan di Web</span>
+                    </label>
+                    <p class="text-xs text-muted ml-7 mt-1">Jika dicentang, portofolio ini akan muncul di halaman depan.</p>
+                </div>
+
                 <div class="mt-8 border-t border-gray-100 pt-6 text-right">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i> Perbarui Portofolio

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/logo.png">
     <title>@yield('title') - {{ \App\Models\Pengaturan::getValue('nama_toko', 'SIFOMA') }}</title>
     <meta name="description" content="{{ \App\Models\Pengaturan::getValue('deskripsi_singkat', 'Layanan Fotokopi dan Percetakan') }}">
     

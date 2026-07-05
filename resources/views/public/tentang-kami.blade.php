@@ -13,9 +13,9 @@
 <section class="py-16 bg-white">
     <div class="container">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="animate-on-scroll">
-                <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white transform rotate-2">
-                    <img src="https://ui-avatars.com/api/?name=SIFOMA&background=2563EB&color=fff&size=500" alt="SIFOMA Store" class="w-full h-auto">
+            <div class="animate-on-scroll flex justify-center w-full">
+                <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white transform rotate-2 max-w-sm md:max-w-md mx-auto">
+                    <img src="{{ asset('toko.png') }}" alt="SIFOMA Store" class="w-full h-auto object-cover">
                 </div>
             </div>
             

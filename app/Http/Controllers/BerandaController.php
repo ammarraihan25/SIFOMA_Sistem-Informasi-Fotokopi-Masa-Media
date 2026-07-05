@@ -15,9 +15,10 @@ class BerandaController extends Controller
         }])->orderBy('urutan')->get();
 
         $promos = Promo::active()->latest()->take(3)->get();
+        $portofolios = \App\Models\Portofolio::active()->latest()->take(8)->get();
 
         $pengaturan = Pengaturan::pluck('value', 'key');
 
-        return view('public.beranda', compact('kategoris', 'promos', 'pengaturan'));
+        return view('public.beranda', compact('kategoris', 'promos', 'pengaturan', 'portofolios'));
     }
 }

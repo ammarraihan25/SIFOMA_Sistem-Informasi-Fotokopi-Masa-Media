@@ -4,28 +4,39 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero text-center">
+<section class="hero py-16 md:py-24 bg-white">
     <div class="container animate-on-scroll">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm text-sm font-bold text-primary mb-6">
-            <span class="relative flex h-3 w-3">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-            </span>
-            {{ $pengaturan['tagline'] ?? 'Cepat, Rapi, Terpercaya' }}
-        </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6">
-            Pusat Layanan <span class="text-primary">Fotokopi</span> & <br><span class="text-accent">Percetakan</span> Terbaik
-        </h1>
-        <p class="text-lg md:text-xl text-muted mb-8 max-w-2xl mx-auto">
-            {{ $pengaturan['deskripsi_singkat'] ?? 'Melayani kebutuhan cetak, fotokopi, dan penjilidan dengan kualitas premium dan pengerjaan kilat.' }}
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ route('layanan') }}" class="btn btn-primary btn-lg">
-                <i class="fas fa-search"></i> Lihat Daftar Harga
-            </a>
-            <a href="{{ route('pesanan.cek') }}" class="btn btn-outline btn-lg bg-white">
-                <i class="fas fa-search-location"></i> Cek Status Pesanan
-            </a>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div class="text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-full shadow-sm border border-slate-100 text-sm font-bold text-primary mb-6">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                    </span>
+                    {{ $pengaturan['tagline'] ?? 'Cepat, Rapi, Terpercaya' }}
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                    Pusat Layanan <span class="text-primary">Fotokopi</span> & <br><span class="text-accent">Percetakan</span> Terbaik
+                </h1>
+                <p class="text-lg md:text-xl text-muted mb-8 max-w-xl">
+                    {{ $pengaturan['deskripsi_singkat'] ?? 'Melayani kebutuhan cetak, fotokopi, dan penjilidan dengan kualitas premium dan pengerjaan kilat.' }}
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="{{ route('layanan') }}" class="btn btn-primary btn-lg justify-center">
+                        <i class="fas fa-search"></i> Lihat Daftar Harga
+                    </a>
+                    <a href="{{ route('pesanan.cek') }}" class="btn btn-outline btn-lg bg-white justify-center">
+                        <i class="fas fa-search-location"></i> Cek Status Pesanan
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Image Content -->
+            <div class="relative mt-8 lg:mt-0">
+                <div class="absolute inset-0 bg-primary opacity-10 rounded-3xl transform translate-x-4 translate-y-4"></div>
+                <img src="{{ asset('banner.jpg') }}" alt="Banner Fotokopi" class="relative rounded-3xl shadow-2xl w-full h-[350px] md:h-[450px] object-cover">
+            </div>
         </div>
     </div>
 </section>
@@ -113,6 +124,50 @@
         
         <div class="text-center mt-8 md:hidden">
             <a href="{{ route('layanan') }}" class="btn btn-outline btn-block">Lihat Semua Layanan</a>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section class="py-16 bg-white">
+    <div class="container">
+        <div class="flex justify-between items-end mb-12 animate-on-scroll">
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Galeri Hasil Cetak & Jilid</h2>
+                <div class="w-24 h-1 bg-primary rounded-full"></div>
+            </div>
+            <a href="{{ route('promo') }}" class="btn btn-outline hidden md:inline-flex">
+                Lihat Galeri <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        @if($portofolios->count() > 0)
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($portofolios as $porto)
+            <div class="group relative overflow-hidden rounded-xl shadow-sm border border-gray-100 animate-on-scroll cursor-pointer">
+                <img src="{{ Storage::url($porto->gambar) }}" alt="{{ $porto->judul }}" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                    @if($porto->kategori)
+                    <span class="badge bg-primary text-white self-start mb-2">{{ $porto->kategori }}</span>
+                    @endif
+                    <h3 class="text-white font-bold text-lg leading-tight mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{{ $porto->judul }}</h3>
+                    @if($porto->deskripsi)
+                    <p class="text-gray-200 text-sm line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{{ $porto->deskripsi }}</p>
+                    @endif
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @else
+        <div class="text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+            <div class="text-4xl text-gray-300 mb-3"><i class="fas fa-camera"></i></div>
+            <p class="text-muted">Galeri portofolio belum tersedia.</p>
+        </div>
+        @endif
+        
+        <div class="text-center mt-8 md:hidden">
+            <a href="{{ route('promo') }}" class="btn btn-outline btn-block">Lihat Semua Galeri</a>
         </div>
     </div>
 </section>
